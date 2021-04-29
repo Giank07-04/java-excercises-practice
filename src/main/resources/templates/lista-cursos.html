@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="utf-8">
+    <title>Cursos</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <h4>Todos los cursos</h4>
+
+    <div class="row">
+        <div class="col-md-3 my-5" th:each="curso : ${cursos}" th:object="${curso}">
+            <a th:href="@{/cursos/{id}(id=*{id})}" class="card shadow-lg" style="text-decoration: none;">
+                <img class="card-img-top"
+                     th:src="@{/assets/{filename}(filename=*{rutaImagen})}"
+                     th:alt="*{titulo}">
+
+                <div class="card-body">
+                    <h2 class="card-title fs-6" th:text="*{titulo}"></h2>
+                    <div class="text-danger fw-bold">
+                        S/[[*{#numbers.formatDecimal(precio, 0, 'COMMA', 2, 'POINT')}]]
+                    </div>
+                    <button class="btn btn-primary w-100 mt-3">Ver detalles</button>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-5" th:with="page=${cursos}">
+        <div class="col-sm-6">
+            <div sd:pagination-summary=""></div>
+        </div>
+        <div class="col-sm-6">
+            <nav class="pull-right">
+                <ul class="pagination" sd:pagination="full"></ul>
+            </nav>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

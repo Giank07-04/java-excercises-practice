@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="utf-8">
+    <title>Nuevo curso | Admin</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <h2>Editar curso</h2>
+
+    <div th:insert="admin/_form :: contenido_form"></div>
+</div>
+
+</body>
+</html>

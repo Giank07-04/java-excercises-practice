@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="utf-8">
+    <title>Registro de usuario</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="shadow-lg mx-auto p-5" style="max-width: 500px;">
+        <h1>Registro de usuario</h1>
+
+        <form th:action="@{''}" method="post" class="mt-5" th:object="${usuario}">
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input id="email" type="text" placeholder="Correo electrónico" class="form-control"
+                       th:field="*{email}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">El mensaje de error va aquí</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password1" class="form-label">Contraseña</label>
+                <input id="password1" type="password" placeholder="Contraseña" class="form-control"
+                       th:field="*{password1}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}">El mensaje de error va aquí</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password2" class="form-label">Repita su contraseña</label>
+                <input id="password2" type="password" placeholder="Contraseña" class="form-control"
+                       th:field="*{password2}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">El mensaje de error va aquí</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrar</button>
+
+            <span class="ms-1">
+                Ya tienes una cuenta?
+                <a href="/login">Inicia sesión</a>
+            </span>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

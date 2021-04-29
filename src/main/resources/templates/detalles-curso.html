@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="utf-8">
+    <title th:text="${curso.titulo}"></title>
+
+    <style>
+        .mercadopago-button {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content" th:object="${curso}">
+
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-fluid rounded w-100"
+                 th:src="@{/assets/{filename}(filename=*{rutaImagen})}"
+                 th:alt="*{titulo}">
+        </div>
+        <div class="col-md-6">
+            <h2 th:text="*{titulo}"></h2>
+            <p th:text="*{descripcion}"></p>
+            <span class="text-danger fw-bold fs-1">
+                S/[[*{#numbers.formatDecimal(precio, 0, 'COMMA', 2, 'POINT')}]]
+            </span>
+
+            <div class="text-end mt-3">
+                <button type="button" class="btn btn-success" onclick="pagarMercadoPago()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    Comprar curso
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div layout:fragment="scripts">
+    <script src="https://www.mercadopago.com.pe/integrations/v1/web-payment-checkout.js"
+            th:attr="data-preference-id=${mercadoPagoPreference.id}">
+    </script>
+    <script>
+        function pagarMercadoPago() {
+            $('.mercadopago-button').click();
+        }
+    </script>
+</div>
+
+</body>
+</html>

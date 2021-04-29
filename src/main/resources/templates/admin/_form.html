@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="contenido_form">
+
+    <form th:action="@{''}" th:object="${curso}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input id="titulo" type="text" placeholder="Título" class="form-control" th:field="*{titulo}" th:errorclass="is-invalid"/>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}">El mensaje de error va aquí</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea id="descripcion" placeholder="Descripción" class="form-control" th:field="*{descripcion}" th:errorclass="is-invalid"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">El mensaje de error va aquí</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input id="precio" type="number" placeholder="Precio" class="form-control" th:field="*{precio}" th:errorclass="is-invalid"/>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}">El mensaje de error va aquí</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen</label>
+            <input id="imagen" name="imagen" type="file" class="form-control" aria-label="Imagen" th:field="*{imagen}" th:errorclass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('imagen')}" th:errors="*{imagen}">El mensaje de error va aquí</div>
+        </div>
+
+        <div class="text-end">
+            <a href="/admin/cursos" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>
